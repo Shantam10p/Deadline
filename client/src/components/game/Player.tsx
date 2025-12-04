@@ -91,11 +91,13 @@ export function Player() {
 
   useEffect(() => {
     if (phase === "playing") {
+      // Only reset movement keys, not camera position
       moveForward.current = false;
       moveBackward.current = false;
       moveLeft.current = false;
       moveRight.current = false;
-    } else {
+    } else if (phase === "menu") {
+      // Only reset camera when going back to menu
       camera.position.set(0, 1.6, 3);
       velocity.current.set(0, 0, 0);
     }

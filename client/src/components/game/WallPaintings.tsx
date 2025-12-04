@@ -127,7 +127,7 @@ function PaintingsContent() {
     { imagePath: "/img10.png", position: [ (half - wallOffset), y, positions4[0]] as [number, number, number], rotation: [0, -Math.PI / 2, 0] as [number, number, number], size },
     { imagePath: "/img11.jpg", position: [ (half - wallOffset), y, positions4[1]] as [number, number, number], rotation: [0, -Math.PI / 2, 0] as [number, number, number], size },
     { imagePath: "/img12.png", position: [ (half - wallOffset), y, positions4[2]] as [number, number, number], rotation: [0, -Math.PI / 2, 0] as [number, number, number], size },
-    { imagePath: "/img2.jpg",  position: [ (half - wallOffset), y, positions4[3]] as [number, number, number], rotation: [0, -Math.PI / 2, 0] as [number, number, number], size },
+    { imagePath: "/img5.png",  position: [ (half - wallOffset), y, positions4[3]] as [number, number, number], rotation: [0, -Math.PI / 2, 0] as [number, number, number], size },
 
     // Front wall (South, Z = +half - wallOffset, faces -Z into room)
     { imagePath: "/img13.jpeg", position: [positions2[0], y,  (half - wallOffset)] as [number, number, number], rotation: [0, Math.PI, 0] as [number, number, number], size },
