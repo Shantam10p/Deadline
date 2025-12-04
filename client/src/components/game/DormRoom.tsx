@@ -2,7 +2,6 @@ import { useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useGameState } from "@/lib/stores/useGameState";
-import { useTexture } from "@react-three/drei";
 
 const ROOM_SIZE = 10;
 const WALL_HEIGHT = 4;
@@ -13,10 +12,6 @@ export function DormRoom() {
   const phase = useGameState((state) => state.phase);
   
   const windowRef = useRef<THREE.Mesh>(null);
-  
-  const woodTexture = useTexture("/textures/wood.jpg");
-  woodTexture.wrapS = woodTexture.wrapT = THREE.RepeatWrapping;
-  woodTexture.repeat.set(4, 4);
   
   useFrame(() => {
     if (windowRef.current && phase === "playing") {
@@ -35,7 +30,7 @@ export function DormRoom() {
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[currentSize, currentSize]} />
-        <meshStandardMaterial map={woodTexture} />
+        <meshStandardMaterial color="#8B4513" />
       </mesh>
       
       <mesh position={[0, WALL_HEIGHT / 2, -halfSize]} receiveShadow>
