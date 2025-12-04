@@ -13,7 +13,7 @@ export function DoorTrigger() {
   const endGame = useGameState((state) => state.endGame);
   const shrinkFactor = useGameState((state) => state.roomShrinkFactor);
   
-  const doorZ = (10 * shrinkFactor) / 2 - 0.3;
+  const doorZ = (40 * shrinkFactor) / 2 - 0.3;
   const doorPosition: [number, number, number] = [0, 1.2, doorZ];
   
   useFrame(() => {

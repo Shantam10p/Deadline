@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useGameState } from "@/lib/stores/useGameState";
 import { DormRoom } from "./DormRoom";
 import { Player } from "./Player";
@@ -9,9 +11,11 @@ import { PowerUps } from "./PowerUps";
 import { DynamicLighting } from "./DynamicLighting";
 import { DoorTrigger } from "./DoorTrigger";
 import { GameUI } from "./GameUI";
+import { MiniGames } from "./MiniGames";
 
 function GameLoop() {
   const phase = useGameState((state) => state.phase);
+  const activeMiniGame = useGameState((state) => state.activeMiniGame);
   const updateTime = useGameState((state) => state.updateTime);
   const updatePowerUps = useGameState((state) => state.updatePowerUps);
   const updateRoomShrink = useGameState((state) => state.updateRoomShrink);
@@ -19,9 +23,14 @@ function GameLoop() {
   useFrame((_, delta) => {
     if (phase !== "playing") return;
     
+    // Timer always runs
     updateTime(delta);
-    updatePowerUps();
-    updateRoomShrink();
+    
+    // Only update power-ups and room shrink when not in a task
+    if (!activeMiniGame) {
+      updatePowerUps();
+      updateRoomShrink();
+    }
   });
   
   return null;
@@ -48,7 +57,7 @@ function GameScene() {
         </>
       )}
       
-      <fog attach="fog" args={["#1a1a2e", 8, 20]} />
+      <fog attach="fog" args={["#1a1a2e", 12, 40]} />
     </>
   );
 }
@@ -57,6 +66,7 @@ export function Game() {
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
       <Canvas
+        dpr={[1, 1.5]}
         shadows
         camera={{
           position: [0, 1.6, 3],
@@ -65,8 +75,9 @@ export function Game() {
           far: 100,
         }}
         gl={{
-          antialias: true,
+          antialias: false,
           powerPreference: "default",
+          toneMapping: THREE.ACESFilmicToneMapping,
         }}
         style={{
           position: "absolute",
@@ -77,6 +88,9 @@ export function Game() {
         }}
       >
         <color attach="background" args={["#0a0a15"]} />
+        <EffectComposer multisampling={0}>
+          <Bloom intensity={0.3} luminanceThreshold={0.4} luminanceSmoothing={0.05} />
+        </EffectComposer>
         
         <Suspense fallback={null}>
           <GameScene />
@@ -84,6 +98,7 @@ export function Game() {
       </Canvas>
       
       <GameUI />
+      <MiniGames />
     </div>
   );
 }
