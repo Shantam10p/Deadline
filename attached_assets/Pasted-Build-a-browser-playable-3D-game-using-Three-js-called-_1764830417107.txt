@@ -1,0 +1,170 @@
+Build a browser-playable 3D game using Three.js called “Finals Week Frenzy.”
+
+Make the game simple, clear, and structured, with NO random features.
+
+Produce three files:
+
+index.html
+
+style.css
+
+main.js
+
+Use only CDN scripts (no bundlers).
+
+1. Game Description
+
+The player is a university student in a 3D dorm room the night before finals.
+
+Goal:
+Collect all study materials before time runs out, while avoiding distractions that increase a stress meter.
+The room slowly shrinks over 90 seconds.
+
+2. Environment (Simple + Defined)
+
+Build a single room using basic Three.js shapes:
+
+Floor (plane)
+
+Four walls (boxes)
+
+Bed (box)
+
+Desk with laptop (boxes)
+
+Mini fridge (box)
+
+Posters (flat planes)
+
+Laundry pile (several stacked spheres)
+
+Pizza boxes & cans (simple boxes + cylinders)
+
+A window (plane) → the color outside changes from dark (night) to brighter (sunrise)
+
+A simple wall clock → shows a countdown with HTML UI
+
+Lighting:
+
+Start warm white
+
+Slowly shift to orange/red as time decreases
+
+Room Shrink:
+The walls slightly move inward over 90 seconds.
+
+3. Player
+
+First-person camera using PointerLockControls
+
+Movement: WASD
+
+Mouse: look around
+
+No jump needed (optional)
+
+4. Collectible Items (Study Materials)
+
+Create exactly these five items with simple glowing colors:
+
+Lecture notes (glowing plane)
+
+Textbook (floating box)
+
+Calculator (small box)
+
+Study guide (flat book)
+
+Lucky pen (thin cylinder)
+
+When collected:
+
+Remove object
+
+Play a simple particle effect (small spheres)
+
+Update UI counter
+
+5. Distractions (Enemies)
+
+Create simple floating objects that move slowly toward the player:
+
+Smartphone (thin box)
+
+Netflix cube (red box)
+
+Discord icon (colored plane)
+
+Pizza delivery knock sphere (sphere that bumps)
+
+Text bubble (“wanna hang?” on a plane)
+
+Music note cluster (three small spheres)
+
+Enemy behavior:
+
+Slowly follow the player
+
+On contact → increase stress meter
+
+6. Power-Ups
+
+Add these simple pickups:
+
+Coffee cup → speed boost for 5 seconds
+
+Headphones → freeze enemies for 3 seconds
+
+Focus pill → slow motion for 3 seconds
+
+Each should slightly glow or pulse.
+
+7. UI + Game Flow
+
+HTML UI elements (simple text):
+
+Stress bar (0–100)
+
+Timer (90 seconds)
+
+Materials collected (0/5)
+
+Win condition:
+
+All 5 items collected
+
+Player touches the door object
+→ Show “You Finished Studying!” screen
+
+Lose conditions:
+
+Stress reaches 100
+
+Timer reaches 0
+
+Walls get too close
+→ Show “You Panicked!” screen
+
+8. Technical Requirements
+
+Use Three.js from CDN
+
+Use requestAnimationFrame loop
+
+Keep all models simple (basic shapes)
+
+Put all JS in main.js
+
+Code must run directly in Replit’s browser preview
+
+9. Deliverables
+
+Return the full project:
+
+index.html
+
+style.css
+
+main.js
+
+All game logic and visuals should be implemented with no placeholders other than basic shapes and colors.
