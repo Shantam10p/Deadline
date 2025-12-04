@@ -130,12 +130,21 @@ export const useGameState = create<GameState>()(
     },
 
     restartGame: () => {
+      const freshTasks: Task[] = [
+        { id: "notebook", name: "Write Essay", description: "Type the essay prompt", type: "notebook" as const, completed: false, active: false },
+        { id: "calculator", name: "Solve Math", description: "Calculate: 24 × 17", type: "calculator" as const, completed: false, active: false },
+        { id: "textbook", name: "Read Chapter", description: "Read and answer question", type: "textbook" as const, completed: false, active: false },
+        { id: "memory", name: "Memory Match", description: "Match the pairs", type: "memory" as const, completed: false, active: false },
+        { id: "notes", name: "Review Notes", description: "Memorize key terms", type: "notes" as const, completed: false, active: false },
+      ];
+      
       set({
         phase: "playing",
         hearts: 5,
         isHit: false,
         timeRemaining: GAME_DURATION,
         materialsCollected: 0,
+        totalMaterials: freshTasks.length,
         roomShrinkFactor: 1,
         collectedMaterialIds: new Set(),
         collectedPowerUpIds: new Set(),
@@ -148,13 +157,7 @@ export const useGameState = create<GameState>()(
           slowMotion: false,
           slowMotionEndTime: 0,
         },
-        tasks: [
-          { id: "notebook", name: "Write Essay", description: "Type the essay prompt", type: "notebook", completed: false, active: false },
-          { id: "calculator", name: "Solve Math", description: "Calculate: 24 × 17", type: "calculator", completed: false, active: false },
-          { id: "textbook", name: "Read Chapter", description: "Read and answer question", type: "textbook", completed: false, active: false },
-          { id: "memory", name: "Memory Match", description: "Match the pairs", type: "memory", completed: false, active: false },
-          { id: "notes", name: "Review Notes", description: "Memorize key terms", type: "notes", completed: false, active: false },
-        ],
+        tasks: freshTasks,
         activeMiniGame: null,
         miniGameData: null,
       });
